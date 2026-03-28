@@ -32,6 +32,8 @@ build_appimage() {
     name="$1"
     prettyname="$2"
     dir="${name:0:2}"
+    appid=com.dxx_redux.dxx-redux.${name}
+    pkgdir=contrib/packaging/linux
 
     appdir="${name}.appdir"
     appimagename="${prettyname}.AppImage"
@@ -49,20 +51,28 @@ build_appimage() {
 
     # Icons
     mkdir -p ${appdir}/usr/share/pixmaps
-    cp ${dir}/${name}.xpm ${appdir}/usr/share/pixmaps
-    cp ${dir}/${name}.xpm ${appdir}/
+    cp ${pkgdir}/${appid}.xpm ${appdir}/usr/share/pixmaps
+    cp ${pkgdir}/${appid}.xpm ${appdir}/
 
-    mkdir -p ${appdir}/usr/share/icons/hicolor/128x128/apps/
-    cp ${dir}/${name}.png ${appdir}/usr/share/icons/hicolor/128x128/apps/
-    cp ${dir}/${name}.png ${appdir}/
+    mkdir -p ${appdir}/usr/share/icons/hicolor/256x256/apps/
+    cp ${pkgdir}/${appid}.png ${appdir}/usr/share/icons/hicolor/256x256/apps/
+    cp ${pkgdir}/${appid}.png ${appdir}/
+
+    mkdir -p ${appdir}/usr/share/icons/hicolor/scalable/apps/
+    cp ${pkgdir}/${appid}.svg ${appdir}/usr/share/icons/hicolor/scalable/apps/
+    cp ${pkgdir}/${appid}.svg ${appdir}/
+
+    # Metainfo
+    mkdir -p ${appdir}/usr/share/metainfo/
+    cp ${pkgdir}/${appid}.metainfo.xml ${appdir}/usr/share/metainfo/
+    cp ${pkgdir}/${appid}.metainfo.xml ${appdir}/
 
     # Menu item
     mkdir -p ${appdir}/usr/share/applications
-    cp ${dir}/${name}.desktop ${appdir}/usr/share/applications
-    cp ${dir}/${name}.desktop ${appdir}/
+    cp ${pkgdir}/${appid}.desktop ${appdir}/usr/share/applications
+    cp ${pkgdir}/${appid}.desktop ${appdir}/
 
     # Soundfont
-
     mkdir -p ${appdir}/usr/share/sounds/sf3
     cp -p TimGM6mb.sf2 ${appdir}/usr/share/sounds/sf3/default-GM.sf3
 
