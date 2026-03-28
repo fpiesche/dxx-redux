@@ -69,7 +69,10 @@ add_executable (d2x-redux
     weapon.c
     )
 
-include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/arch/include)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/../arch/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../include
+)
 
 target_compile_definitions(d2x-redux PUBLIC
     DXX_VERSION_MAJORi=${PROJECT_VERSION_MAJOR}
@@ -84,7 +87,7 @@ if(NOT "${SIZEOF_SSIZE_T}" STREQUAL "")
 endif()
 
 if(OPENGL)
-    target_link_libraries(d2x-redux PRIVATE arch_ogl xmodel)
+    target_link_libraries(d2x-redux PRIVATE d2x-arch_ogl d2x-xmodel)
 endif()
 
 if(SDLMIXER)
@@ -93,7 +96,7 @@ endif()
 
 if(EDITOR)
     target_sources(d2x-redux PRIVATE bmread.c)
-    target_link_libraries(d2x-redux PRIVATE editor ui)
+    target_link_libraries(d2x-redux PRIVATE d2x-editor d2x-ui)
 endif()
 
 if(UDP)
@@ -102,7 +105,7 @@ endif()
 
 if(WIN32)
     target_link_libraries(d2x-redux PUBLIC glu32 winmm ws2_32 dbghelp)
-    target_link_libraries(d2x-redux PRIVATE arch_win32)
+    target_link_libraries(d2x-redux PRIVATE d2x-arch_win32)
     target_sources(d2x-redux PRIVATE
         ${CMAKE_SOURCE_DIR}/arch/win32/d2x-rebirth.ico
         ${CMAKE_SOURCE_DIR}/arch/win32/d2x-rebirth.rc
@@ -149,11 +152,11 @@ if(WIN32)
 endif()
 
 if(APPLE)
-    target_link_libraries(d2x-redux PRIVATE arch_cocoa)
+    target_link_libraries(d2x-redux PRIVATE d2x-arch_cocoa)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_link_libraries(d2x-redux PRIVATE arch_x11)
+    target_link_libraries(d2x-redux PRIVATE d2x-arch_x11)
     list(APPEND EXTRA_LIBRARIES "X11")
 endif()
 
@@ -172,7 +175,7 @@ if(PNG)
     find_package(PNG REQUIRED)
 endif()
 target_include_directories(d2x-redux PUBLIC ${SDL_INCLUDE_DIR} ${PHYSFS_INCLUDE_DIR})
-target_link_libraries(d2x-redux PRIVATE 2d 3d arch_sdl iff libmve maths mem misc texmap)
+target_link_libraries(d2x-redux PRIVATE d2x-2d d2x-3d d2x-arch_sdl d2x-iff d2x-libmve d2x-maths d2x-mem d2x-misc d2x-texmap)
 target_link_libraries(d2x-redux PUBLIC ${OPENGL_LIBRARY} ${SDL_LIBRARY} ${SDL_MIXER_LIBRARY} ${PHYSFS_LIBRARY} ${PNG_LIBRARY} ${EXTRA_LIBRARIES})
 target_sources(d2x-redux PRIVATE vers_id.c)
-install(TARGETS d2x-redux RUNTIME DESTINATION .)
+install(TARGETS d2x-redux ${CMAKE_INSTALL_BINDIR})
