@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.dxx_redux.dxx-redux.d1x-redux</id>
+  <name>D1X-Redux</name>
+  <developer id="com.dxx_redux.dxx-redux">
+    <name>DXX-Redux Contributors</name>
+    <url>https://github.com/dxx-redux/dxx-redux/graphs/contributors</url>
+  </developer>
+  <launchable type="desktop-id">com.dxx_redux.dxx-redux.d1x-redux.desktop</launchable>
+  <provides>
+    <id>com.dxx_redux.dxx-redux.d1x-redux.desktop</id>
+  </provides>
+  <summary>Modern cross-platform port Descent</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>
+    LicenseRef-proprietary=https://raw.githubusercontent.com/dxx-redux/dxx-redux/master/COPYING.txt,GPL-3.0
+  </project_license>
+  <url type="homepage">https://github.com/dxx-redux/dxx-redux/</url>
+  <url type="vcs-browser">https://github.com/dxx-redux/dxx-redux/</url>
+  <description>
+      <p>D1X-Redux is a modern source port of Descent, based on DXX-Retro. It
+        features an observer mode used in The Observatory tournament.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main Menu</caption>
+      <image>https://dxx-redux.com/screenshots/d1x-redux-menu.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Level 1</caption>
+      <image>https://dxx-redux.com/screenshots/d1x-redux-lvl1.png</image>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+    <category>Shooter</category>
+  </categories>
+  <keywords>
+    <keyword>Descent</keyword>
+    <keyword>6dof</keyword>
+    <keyword>scifi</keyword>
+    <keyword>flight</keyword>
+    <keyword>retro</keyword>
+    <keyword>sourceport</keyword>
+    <keyword>port</keyword>
+  </keywords>
+  <releases>
+    <release version="1.1" date="2025-01-25">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v1.1</url>
+    </release>
+    <release version="1.0" date="2024-01-23">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v1.0</url>
+    </release>
+    <release version="0.9" date="2023-07-27">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.9</url>
+    </release>
+    <release version="0.8" date="2023-06-25">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.8</url>
+    </release>
+    <release version="0.7" date="2023-05-18">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.7</url>
+    </release>
+    <release version="0.6" date="2023-05-12">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.6</url>
+    </release>
+    <release version="0.5" date="2023-05-03">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.5</url>
+    </release>
+    <release version="0.4" date="2023-04-25">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.4</url>
+    </release>
+    <release version="0.3" date="2023-04-24">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.3</url>
+    </release>
+    <release version="0.2" date="2023-04-22">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.2</url>
+    </release>
+    <release version="0.1" date="2023-04-22">
+      <url>https://github.com/dxx-redux/dxx-redux/releases/tag/v0.1</url>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-fantasy">intense</content_attribute>
+  </content_rating>
+</component>

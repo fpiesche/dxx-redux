@@ -18,6 +18,8 @@ set(CMAKE_C_FLAGS_MINSIZEREL "${CMAKE_C_FLAGS_MINSIZEREL} -DRELEASE")
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DRELEASE")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -DRELEASE")
 
+set(FREEDESKTOP_APP_ID_D1XR "com.dxx_redux.dxx-redux.d1x-redux")
+
 if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-address-of-packed-member -Wno-deprecated-declarations")
 endif()
@@ -86,7 +88,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 endif()
 
 if(NOT WIN32)
-    add_compile_definitions(SHAREPATH="/usr/share/games/d1x-redux")
+    add_compile_definitions(SHAREPATH="${CMAKE_INSTALL_PREFIX}/share/games/d1x-redux")
 endif()
 
 add_subdirectory(2d)
@@ -99,31 +101,60 @@ add_subdirectory(mem)
 add_subdirectory(misc)
 add_subdirectory(texmap)
 
-add_dependencies(d1x-redux 2d 3d arch_sdl iff maths mem misc texmap)
+add_dependencies(d1x-redux d1x-2d d1x-3d d1x-arch_sdl d1x-iff d1x-maths d1x-mem d1x-misc d1x-texmap)
 
 if(WIN32)
     add_subdirectory(arch/win32)
-    add_dependencies(d1x-redux arch_win32)
+    add_dependencies(d1x-redux d1x-arch_win32)
 endif()
 
 if(APPLE)
     add_subdirectory(arch/cocoa)
-    add_dependencies(d1x-redux arch_cocoa)
+    add_dependencies(d1x-redux d1x-arch_cocoa)
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     add_subdirectory(arch/x11)
-    add_dependencies(d1x-redux arch_x11)
+    add_dependencies(d1x-redux d1x-arch_x11)
 endif()
 
 if(OPENGL)
     add_subdirectory(arch/ogl)
     add_subdirectory(xmodel)
-    add_dependencies(d1x-redux arch_ogl xmodel)
+    add_dependencies(d1x-redux d1x-arch_ogl d1x-xmodel)
 endif()
 
 if(EDITOR)
     add_subdirectory(editor)
     add_subdirectory(ui)
-    add_dependencies(d1x-redux editor ui)
+    add_dependencies(d1x-redux d1x-editor d1x-ui)
+endif()
+
+if(UNIX AND NOT APPLE)
+    set(LINUX_PKG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../contrib/packaging/linux")
+    install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D1XR}.svg
+            DESTINATION share/icons/hicolor/scalable/apps/
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+    install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D1XR}.png
+            DESTINATION share/icons/hicolor/256x256/apps/
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+    install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D1XR}.xpm
+            DESTINATION share/pixmaps/
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+    install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D1XR}.metainfo.xml
+            DESTINATION share/metainfo/
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+    install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D1XR}.desktop
+            DESTINATION share/applications/
+            PERMISSIONS WORLD_READ WORLD_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
 endif()
