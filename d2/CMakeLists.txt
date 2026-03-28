@@ -142,27 +142,32 @@ if(UNIX AND NOT APPLE)
             DESTINATION share/icons/hicolor/scalable/apps/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
                         GROUP_READ GROUP_EXECUTE
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+            COMPONENT d2x-redux)
     install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.png
             DESTINATION share/icons/hicolor/256x256/apps/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
                         GROUP_READ GROUP_EXECUTE
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+            COMPONENT d2x-redux)
     install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.xpm
             DESTINATION share/pixmaps/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
                         GROUP_READ GROUP_EXECUTE
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+            COMPONENT d2x-redux)
     install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.metainfo.xml
             DESTINATION share/metainfo/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
                         GROUP_READ GROUP_EXECUTE
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+            COMPONENT d2x-redux)
     install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.desktop
             DESTINATION share/applications/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
                         GROUP_READ GROUP_EXECUTE
-                        OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+                        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+            COMPONENT d2x-redux)
 endif()
 
 # Packaging
@@ -175,9 +180,12 @@ set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.txt")
 set(CPACK_BUILD_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 
 set(CPACK_PACKAGE_EXECUTABLES "d2x-redux" "D2X-Redux")
 set(CPACK_PACKAGE_ICON ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.svg)
+
+set(CPACK_APPIMAGE_DESKTOP_FILE ${FREEDESKTOP_APP_ID_D2XR}.desktop)
 
 set(CPACK_DEB_COMPONENT_INSTALL ON)
 set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
@@ -188,5 +196,9 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER "DXX-Redux Contributors")
 
 set(CPACK_RPM_PACKAGE_REQUIRES "sdl12-compat, SDL_mixer, physfs, glew, mesa")
 set(CPACK_RPM_PACKAGE_DEBUG ON)
+set(CPACK_RPM_COMPONENT_INSTALL ON)
 
 include(CPack)
+cpack_add_component(d2x-redux
+    DISPLAY_NAME "D2X-Redux"
+)
