@@ -23,6 +23,7 @@ set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DRELEASE")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -DRELEASE")
 
 set(FREEDESKTOP_APP_ID_D2XR "com.dxx_redux.dxx-redux.d2x-redux")
+set(LINUX_PKG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../contrib/packaging/linux")
 
 if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-address-of-packed-member -Wno-deprecated-declarations")
@@ -135,8 +136,8 @@ if(EDITOR)
     add_dependencies(d2x-redux d2x-editor d2x-ui)
 endif()
 
+# Installation
 if(UNIX AND NOT APPLE)
-    set(LINUX_PKG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../contrib/packaging/linux")
     install(FILES ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.svg
             DESTINATION share/icons/hicolor/scalable/apps/
             PERMISSIONS WORLD_READ WORLD_EXECUTE
@@ -163,3 +164,29 @@ if(UNIX AND NOT APPLE)
                         GROUP_READ GROUP_EXECUTE
                         OWNER_READ OWNER_WRITE OWNER_EXECUTE)
 endif()
+
+# Packaging
+set(CPACK_PACKAGE_VENDOR "DXX-Redux Contributors")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A modern source port of Descent II")
+set(CPACK_PACKAGE_CONTACT "https://github.com/dxx-redux/dxx-redux/")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.txt")
+set(CPACK_BUILD_SOURCE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+
+set(CPACK_PACKAGE_EXECUTABLES "d2x-redux" "D2X-Redux")
+set(CPACK_PACKAGE_ICON ${LINUX_PKG_PATH}/${FREEDESKTOP_APP_ID_D2XR}.svg)
+
+set(CPACK_DEB_COMPONENT_INSTALL ON)
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+set(CPACK_DEBIAN_DEBUGINFO_PACKAGE ON)
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "sdl12-compat, libsdl-mixer1.2, libphysfs, glew, mesa")
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://www.dxx-redux.com/")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "DXX-Redux Contributors")
+
+set(CPACK_RPM_PACKAGE_REQUIRES "sdl12-compat, SDL_mixer, physfs, glew, mesa")
+set(CPACK_RPM_PACKAGE_DEBUG ON)
+
+include(CPack)
