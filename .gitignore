@@ -21,6 +21,9 @@ build
 *.rar
 *.tar
 *.zip
+*.app
+*.AppImage
+*.deb
 
 # Logs and databases #
 ######################
