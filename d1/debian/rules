@@ -10,6 +10,7 @@ package = d1x-rebirth
 SCONS = scons -Q
 SCONSFLAGS = prefix=/usr
 BINARY = d1x-rebirth
+APPID = com.dxx_redux.dxx-redux.d1x-redux
 
 PREFIX = /usr
 BIN_DIR = $(PREFIX)/games
@@ -60,8 +61,10 @@ binary-arch:    checkroot build
 	install -m 644 COPYING.txt    $(TMP_DATA_DIR)
 	install -m 644 README.txt     $(TMP_DATA_DIR)
 	unzip d1xr-hires.zip -d $(TMP_DATA_DIR)
-	install -m 644 d1x-rebirth.desktop $(TMP_SHARE_DIR)/applications
-	install -m 644 d1x-rebirth.xpm $(TMP_SHARE_DIR)/pixmaps
+	install -m 644 ../contrib/packaging/linux/${APPID}.desktop $(TMP_SHARE_DIR)/applications
+	install -m 644 ../contrib/packaging/linux/${APPID}.xpm $(TMP_SHARE_DIR)/pixmaps
+	install -m 644 ../contrib/packaging/linux/${APPID}.png $(TMP_SHARE_DIR)/icons/hicolor/256x256/apps/
+	install -m 644 ../contrib/packaging/linux/${APPID}.svg $(TMP_SHARE_DIR)/icons/hicolor/scalable/apps/
 	dpkg-shlibdeps $(TMP_BIN_DIR)/$(BINARY)
 	dpkg-gencontrol -isp
 	chown -R root:root $(DEBIAN_TMP)
