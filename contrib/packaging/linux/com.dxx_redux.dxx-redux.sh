@@ -1,0 +1,68 @@
+#!/bin/bash
+GAME=$1
+ARGS="${@:2}"
+echo "Game: $GAME"
+echo "Arguments: $ARGS"
+
+if [[ -z $GAME ]]; then
+    selection=$(zenity --question --title="Select game" \
+                    --text "Which game would you like to launch?" \
+                    --extra-button="Descent" \
+                    --extra-button="Descent II" \
+                    --extra-button="Cancel" \
+                    --switch)
+    case $selection in
+        "Descent")
+            GAME="d1x"
+            ;;
+        "Descent II")
+            GAME="d2x"
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
+fi
+
+case $GAME in
+    "d1x")
+        DATAFILE="descent.hog"
+        DATADIR="$XDG_DATA_HOME/d1x-redux"
+        EXECUTABLE="d1x-redux"
+        HOMEVAR="D1X_REDUX_HOME"
+        GAMETITLE="Descent"
+        ;;
+    "d2x")
+        DATAFILE="descent2.hog"
+        DATADIR="$XDG_DATA_HOME/d2x-redux"
+        EXECUTABLE="d2x-redux"
+        HOMEVAR="D2X_REDUX_HOME"
+        GAMETITLE="Descent II"
+        ;;
+    *)
+        zenity --error --title="Unknown game specified" \
+            --text "<b>Unknown game: <tt>$GAME</tt></b>\\n\\nPlease run this launcher with either <tt><b>d1x</b></tt> or <tt><b>d2x</b></tt> as a parameter to select Descent or Descent II." \
+            --ok-label 'Quit' \
+            --no-wrap
+        exit 1
+        ;;
+esac
+
+if [[ $(find "$DATADIR/data/" -iname $DATAFILE) ]]; then
+    # Prefer data and savegames in Flatpak installation
+    export $HOMEVAR="$DATADIR/saves"
+    $EXECUTABLE -hogdir "$DATADIR/data/" $ARGS
+elif [[ $(find "$HOME/.$EXECUTABLE/data/" -iname "$DATAFILE") ]]; then
+    # Otherwise try and run from existing installation
+    exec $EXECUTABLE
+else
+    # Create game data/save paths if needed to take at least that step off the user
+    if [[ ! -d "$DATADIR/data" ]]; then mkdir -p "$DATADIR/data"; fi
+    if [[ ! -d "$DATADIR/saves" ]]; then mkdir -p "$DATADIR/saves"; fi
+    # Finally, fail with error message.
+    zenity --error \
+        --title "Could not find $GAMETITLE game data" \
+        --text "Please copy the game data files for $GAMETITLE to <tt><b>$DATADIR/data/</b></tt>." \
+        --ok-label 'Quit'
+    exit 1
+fi

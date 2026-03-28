@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=DXX-Redux
+Comment=A modern source port of the Descent 1+2 engine
+Exec=com.dxx_redux.dxx-redux.sh
+Icon=com.dxx_redux.dxx-redux
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;
+StartupNotify=false
+
