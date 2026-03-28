@@ -184,5 +184,6 @@ target_include_directories(d1x-redux PUBLIC ${SDL_INCLUDE_DIR} ${PHYSFS_INCLUDE_
 target_link_libraries(d1x-redux PRIVATE d1x-2d d1x-3d d1x-arch_sdl d1x-iff d1x-maths d1x-mem d1x-misc d1x-texmap)
 target_link_libraries(d1x-redux PUBLIC ${OPENGL_LIBRARY} ${SDL_LIBRARY} ${SDL_MIXER_LIBRARY} ${PHYSFS_LIBRARY} ${PNG_LIBRARY} ${EXTRA_LIBRARIES})
 target_sources(d1x-redux PRIVATE vers_id.c)
-install(TARGETS d1x-redux ${CMAKE_INSTALL_BINDIR}
+install(TARGETS d1x-redux
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
         COMPONENT d1x-redux)

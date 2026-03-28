@@ -186,5 +186,6 @@ target_include_directories(d2x-redux PUBLIC ${SDL_INCLUDE_DIR} ${PHYSFS_INCLUDE_
 target_link_libraries(d2x-redux PRIVATE d2x-2d d2x-3d d2x-arch_sdl d2x-iff d2x-libmve d2x-maths d2x-mem d2x-misc d2x-texmap)
 target_link_libraries(d2x-redux PUBLIC ${OPENGL_LIBRARY} ${SDL_LIBRARY} ${SDL_MIXER_LIBRARY} ${PHYSFS_LIBRARY} ${PNG_LIBRARY} ${EXTRA_LIBRARIES})
 target_sources(d2x-redux PRIVATE vers_id.c)
-install(TARGETS d2x-redux ${CMAKE_INSTALL_BINDIR}
+install(TARGETS d2x-redux
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
         COMPONENT d2x-redux)
