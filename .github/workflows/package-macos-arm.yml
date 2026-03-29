@@ -22,16 +22,15 @@ jobs:
           - d2
 
     steps:
+      - uses: melusina-org/setup-macports@v1
+
       - name: Clone repository
         uses: actions/checkout@v6
-
       - name: Fetch tags
         run: git fetch --tags
 
-      - uses: melusina-org/setup-macports@v1
-
       - name: Install library dependencies
-        run: port install libsdl2 sdl12-compat physfs glew libogg mpg123 flac fluidsynth ninja
+        run: port install libsdl2 sdl12-compat libsdl_mixer physfs glew libogg mpg123 flac fluidsynth ninja
 
       - name: Build and package
         run: |
