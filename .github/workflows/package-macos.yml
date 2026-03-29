@@ -51,5 +51,6 @@ jobs:
       - name: Store artifact
         uses: actions/upload-artifact@v7
         with:
-          name: macos-arm
-          path: "*.dmg"
+          name: ${{ matrix.name }}-macos-universal.zip
+          path: "**/*.dmg"
+          if-no-files-found: error
