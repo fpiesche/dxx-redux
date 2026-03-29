@@ -28,11 +28,10 @@ jobs:
       - name: Fetch tags
         run: git fetch --tags
 
-      - name: Install build dependencies
-        run: brew install --formula dylibbundler
+      - uses: melusina-org/setup-macports@v1
 
       - name: Install library dependencies
-        run: brew install --formula sdl2 sdl12-compat physfs glew libogg mpg123 flac fluid-synth ninja
+        run: port install libsdl2 sdl12-compat physfs glew libogg mpg123 flac fluidsynth ninja
 
       - name: Build and package
         run: |
