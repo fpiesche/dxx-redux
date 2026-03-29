@@ -8,6 +8,8 @@ project(
     LANGUAGES C CXX
     )
 
+message(STATUS "Building D2X-Redux")
+
 option(OPENGL "Build with OpenGL support [default: ON]" ON)
 option(SDLMIXER "Build with SDL_Mixer support for sound and music (includes external music support) [default: ON]" ON)
 option(ASM "Build with ASSEMBLER code (only with OpenGL OFF, requires NASM and x86) [default: OFF]" OFF)
@@ -197,6 +199,12 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER "DXX-Redux Contributors")
 set(CPACK_RPM_PACKAGE_REQUIRES "sdl12-compat, SDL_mixer, physfs, glew, mesa")
 set(CPACK_RPM_PACKAGE_DEBUG ON)
 set(CPACK_RPM_COMPONENT_INSTALL ON)
+
+set(CPACK_BUNDLE_COMPONENT_INSTALL ON)
+set(CPACK_BUNDLE_NAME ${PROJECT_NAME})
+set(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/Info.plist)
+set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/${PROJECT_NAME}.icns)
+set(CPACK_BUNDLE_STARTUP_COMMAND ${PROJECT_NAME})
 
 include(CPack)
 cpack_add_component(d2x-redux

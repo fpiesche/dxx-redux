@@ -23,6 +23,7 @@ set(CPACK_DEB_COMPONENT_INSTALL ON)
 set(CPACK_DEBIAN_DEBUGINFO_PACKAGE ON)
 set(CPACK_RPM_COMPONENT_INSTALL ON)
 set(CPACK_RPM_PACKAGE_DEBUG ON)
+set(CPACK_BUNDLE_COMPONENT_INSTALL ON)
 
 set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
 set(CPACK_SOURCE_IGNORE_FILES
@@ -34,6 +35,11 @@ set(CPACK_SOURCE_IGNORE_FILES
 
 # Installation
 if(DXX_BUILD_COMBINED)
+  if(APPLE OR WINDOWS)
+    message(FATAL_ERROR "Combined packages are only supported on Linux.")
+  else()
+    message(STATUS "Building combined package.")
+  endif()
   set(FREEDESKTOP_APP_ID_DXXR "com.dxx_redux.dxx-redux")
   set(CPACK_ARCHIVE_COMPONENT_INSTALL OFF)
   set(CPACK_DEB_COMPONENT_INSTALL OFF)
@@ -103,6 +109,5 @@ if(DXX_BUILD_COMBINED)
       DISPLAY_NAME "DXX-Redux"
       DEPENDS d1x-redux d2x-redux
     )
-
   endif()
 endif()
