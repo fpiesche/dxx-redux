@@ -206,37 +206,15 @@ set(CPACK_BUNDLE_COMPONENT_INSTALL ON)
 set(CPACK_BUNDLE_NAME d1x-redux)
 set(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/Info.plist)
 set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/d1x-redux.icns)
-if (NOT "${CMAKE_GENERATOR}" STREQUAL "Xcode")
-  install(
-    FILES
-        $<TARGET_FILE:FLAC::FLAC>
-        $<TARGET_FILE:fluidsynth::fluidsynth>
-        $<TARGET_FILE:GLEW::GLEW>
-        $<TARGET_FILE:glib::glib>
-        $<TARGET_FILE:gthread::gthread>
-        $<TARGET_FILE:intl::intl>
-        $<TARGET_FILE:mp3lame::mp3lame>
-        $<TARGET_FILE:MPG123::MPG123>
-        $<TARGET_FILE:ogg::ogg>
-        $<TARGET_FILE:opus::opus>
-        $<TARGET_FILE:pcre::pcre>
-        $<TARGET_FILE:PhysFS::PhysFS>
-        $<TARGET_FILE:png::png>
-        $<TARGET_FILE:portaudio::portaudio>
-        $<TARGET_FILE:readline::readline>
-        $<TARGET_FILE:SDL_mixer::SDL_mixer>
-        $<TARGET_FILE:SDL::SDL>
-        $<TARGET_FILE:SDL2::SDL2>
-        $<TARGET_FILE:sndfile::sndfile>
-        $<TARGET_FILE:vorbis::vorbis>
-        $<TARGET_FILE:vorbis::vorbisenc>
-        $<TARGET_FILE:vorbisfile::vorbisfile>
-    DESTINATION $<TARGET_FILE_DIR:d1x-redux>/../Frameworks/)
-endif ()
-set_target_properties(d1x-redux PROPERTIES
-  INSTALL_RPATH @executable_path/../Frameworks)
 
 include(CPack)
 cpack_add_component(d1x-redux
     DISPLAY_NAME "D1X-Redux"
 )
+
+if(APPLE)
+  install(CODE "
+    include(BundleUtilities)
+    fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/${CPACK_BUNDLE_NAME}.app\"  \"\"  \"\")
+    " COMPONENT Runtime)
+endif()

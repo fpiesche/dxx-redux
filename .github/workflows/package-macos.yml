@@ -39,12 +39,13 @@ jobs:
         run: |
           cd ${{ matrix.build.dir }}
           echo "::group::Configure"
-          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=./install -DCMAKE_BUILD_TYPE=RelWithDebInfo
           echo "::endgroup::"
           echo "::group::Build"
           cmake --build build
           echo "::endgroup::"
           echo "::group::Package"
+          cmake --install .
           cd build && cpack -G Bundle
           echo "::endgroup::"
 
