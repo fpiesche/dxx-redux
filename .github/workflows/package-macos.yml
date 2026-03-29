@@ -24,11 +24,14 @@ jobs:
             name: d1x-redux
 
     steps:
-      - name: Set up MacPorts
-        uses: melusina-org/setup-macports@v1
-
       - name: Clone repository
         uses: actions/checkout@v6
+
+      - name: Set up MacPorts
+        uses: melusina-org/setup-macports@v1
+        with:
+          parameters: .github/parameters/setup-macports.yaml
+
       - name: Fetch tags
         run: git fetch --tags
 
