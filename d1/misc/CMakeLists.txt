@@ -15,6 +15,7 @@ endif()
 
 include_directories(../include ../arch/include ../main)
 
-find_package(SDL)
-find_package(PhysFS)
+find_package(SDL REQUIRED)
+find_package(PhysFS REQUIRED)
+find_package(PNG REQUIRED)
 target_include_directories(d1x-misc PUBLIC ${SDL_INCLUDE_DIR} ${PHYSFS_INCLUDE_DIR})
