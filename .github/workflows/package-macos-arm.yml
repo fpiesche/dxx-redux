@@ -44,7 +44,7 @@ jobs:
           cmake --build build
           echo "::endgroup::"
           echo "::group::Package"
-          cpack -G Bundle
+          cd build && cpack -G Bundle
           echo "::endgroup::"
 
       - name: Store artifact
