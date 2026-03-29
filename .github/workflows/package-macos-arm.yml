@@ -31,12 +31,12 @@ jobs:
 
       - name: Install library dependencies
         run: >
-          port install libsdl2 sdl12-compat libsdl_mixer
-          glew libpng
-          libogg mpg123 flac fluidsynth
-          physfs
-          ninja
-          +universal
+          port install
+          libsdl2 +universal sdl12-compat +universal libsdl_mixer +universal
+          glew +universal libpng +universal
+          libogg +universal mpg123 +universal flac +universal fluidsynth +universal
+          physfs +universal
+          ninja +universal
 
       - name: Build and package
         run: |
