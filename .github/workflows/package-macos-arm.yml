@@ -30,13 +30,13 @@ jobs:
         run: git fetch --tags
 
       - name: Install library dependencies
-        run: port install libsdl2 sdl12-compat physfs glew libogg mpg123 flac fluidsynth ninja
+        run: port install libsdl2 sdl12-compat libsdl_mixer physfs glew libogg mpg123 flac fluidsynth ninja
 
       - name: Build and package
         run: |
           cd ${{ matrix.build }}
           echo "::group::Configure"
-          cmake -B build -G Ninja -DSDLMIXER=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
           echo "::endgroup::"
           echo "::group::Build"
           cmake --build build
