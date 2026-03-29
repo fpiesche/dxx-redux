@@ -37,9 +37,15 @@ jobs:
       - name: Build and package
         run: |
           cd ${{ matrix.build }}
+          echo "::group::Configure"
           cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          echo "::endgroup::"
+          echo "::group::Build"
           cmake --build build
+          echo "::endgroup::"
+          echo "::group::Package"
           cpack -G Bundle
+          echo "::endgroup::"
 
       - name: Store artifact
         uses: actions/upload-artifact@v7

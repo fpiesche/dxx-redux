@@ -168,6 +168,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # Packaging
+set(CPACK_PACKAGE_NAME "D1X-Redux")
 set(CPACK_PACKAGE_VENDOR "DXX-Redux Contributors")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A modern source port of Descent")
 set(CPACK_PACKAGE_CONTACT "https://github.com/dxx-redux/dxx-redux/")
