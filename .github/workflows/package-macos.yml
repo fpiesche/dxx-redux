@@ -52,5 +52,5 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.build.name }}-macos-universal.zip
-          path: "build/*.dmg"
+          path: "${{ matrix.build.dir }}/build/*.dmg"
           if-no-files-found: error
