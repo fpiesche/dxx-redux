@@ -204,7 +204,6 @@ set(CPACK_BUNDLE_COMPONENT_INSTALL ON)
 set(CPACK_BUNDLE_NAME d1x-redux)
 set(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/Info.plist)
 set(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_SOURCE_DIR}/arch/cocoa/d1x-redux.icns)
-set(CPACK_BUNDLE_STARTUP_COMMAND d1x-redux)
 
 include(CPack)
 cpack_add_component(d1x-redux
