@@ -21,7 +21,7 @@ jobs:
           - dir: d1
             name: d1x-redux 
           - dir: d2
-            name: d1x-redux
+            name: d2x-redux
 
     steps:
       - name: Clone repository
