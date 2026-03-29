@@ -1,4 +1,4 @@
-name: Package - macOS
+name: macOS
 
 on:
   #push:
@@ -13,40 +13,40 @@ on:
 
 jobs:
   macos:
-    name: macOS Apps
-    runs-on: macos-13
-    env:
-      MACOSX_DEPLOYMENT_TARGET: 10.14
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v3
+    name: macOS ${{ matrix.build.name }}
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        build:
+          - dir: d1
+            name: d1x-redux 
+          - dir: d2
+            name: d1x-redux
 
+    steps:
+      - name: Set up MacPorts
+        uses: melusina-org/setup-macports@v1
+
+      - name: Clone repository
+        uses: actions/checkout@v6
       - name: Fetch tags
         run: git fetch --tags
 
-      - name: Install build dependencies
-        run: brew install --formula dylibbundler
+      - name: Build and package
+        run: |
+          cd ${{ matrix.build.dir }}
+          echo "::group::Configure"
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          echo "::endgroup::"
+          echo "::group::Build"
+          cmake --build build
+          echo "::endgroup::"
+          echo "::group::Package"
+          cd build && cpack -G Bundle
+          echo "::endgroup::"
 
-      - name: Install library dependencies
-        run: brew install --formula sdl2 sdl12-compat physfs glew libogg mpg123 flac fluid-synth
-
-      - name: Configure D1
-        run: cmake -S d1 -B buildd1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
-
-      - name: Build D1
-        run: cmake --build buildd1
-
-      - name: Configure D2
-        run: cmake -S d2 -B buildd2 -DCMAKE_BUILD_TYPE=RelWithDebInfo
-
-      - name: Build D2
-        run: cmake --build buildd2
-
-      - name: Package
-        run: ./contrib/packaging/macos/build_package.sh
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Store artifact
+        uses: actions/upload-artifact@v7
         with:
-          name: macos
-          path: '*.zip'
+          name: macos-arm
+          path: "*.dmg"

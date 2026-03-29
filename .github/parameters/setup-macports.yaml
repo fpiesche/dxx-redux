@@ -1,0 +1,16 @@
+variants:
+  select: "universal"
+ports:
+  - libsdl2
+  - sdl12-compat
+  - libsdl_mixer
+  - glew
+  - libpng
+# Fluidsynth universal builds are currently broken because of a Portaudio failure
+# https://trac.macports.org/ticket/71481
+#  - fluidsynth
+  - libogg
+  - mpg123
+  - flac
+  - physfs
+  - ninja
