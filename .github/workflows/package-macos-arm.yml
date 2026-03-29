@@ -36,6 +36,7 @@ jobs:
           libogg mpg123 flac fluidsynth
           physfs
           ninja
+          +universal
 
       - name: Build and package
         run: |
