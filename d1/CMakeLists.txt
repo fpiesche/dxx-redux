@@ -2,7 +2,16 @@
 # project specific logic here.
 #
 cmake_minimum_required (VERSION 3.21)
-project(d1x-redux VERSION 1.1)
+
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "" FORCE)
+endif()
+
+project(
+    d1x-redux
+    VERSION 1.1
+    LANGUAGES C CXX
+)
 
 message(STATUS "Building D1X-Redux")
 

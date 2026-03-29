@@ -1,4 +1,4 @@
-name: Package - macOS - arm
+name: Package - macOS
 
 on:
   #push:
@@ -13,8 +13,8 @@ on:
 
 jobs:
   macos:
-    name: macOS Apps
-    runs-on: macos-14
+    name: macOS
+    runs-on: macos-latest
     strategy:
       matrix:
         build:

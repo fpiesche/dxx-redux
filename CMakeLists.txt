@@ -1,4 +1,9 @@
 cmake_minimum_required (VERSION 3.21)
+
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "" FORCE)
+endif()
+
 project(
     dxx-redux
     VERSION 1.1
