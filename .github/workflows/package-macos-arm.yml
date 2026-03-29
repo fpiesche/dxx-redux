@@ -36,3 +36,9 @@ jobs:
 
       - name: Package
         run: cd build && cpack -G Bundle && ls -la
+
+      - name: Store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-arm
+          path: build/*.dmg
