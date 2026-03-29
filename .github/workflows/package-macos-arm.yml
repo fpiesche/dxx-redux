@@ -30,7 +30,7 @@ jobs:
         run: git fetch --tags
 
       - name: Install library dependencies
-        run: port install libsdl2 sdl12-compat libsdl_mixer physfs glew libogg mpg123 flac fluidsynth ninja
+        run: port install libsdl2 sdl12-compat libsdl_mixer physfs glew libogg libvorbis mpg123 flac fluidsynth ninja
 
       - name: Build and package
         run: |
